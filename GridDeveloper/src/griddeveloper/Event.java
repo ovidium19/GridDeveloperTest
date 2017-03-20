@@ -10,10 +10,14 @@ package griddeveloper;
  * @author BOCU
  */
 public class Event {
+    private static int count=0;
     private double xCord,yCord;
+    private int id;
     private String name;
     
     public Event(double x,double y,String rname){
+        count+=1;
+        id=count;
         xCord=x;
         yCord=y;
         name=rname;
@@ -48,6 +52,6 @@ public class Event {
     }
     @Override
     public String toString(){
-        return "name: "+name+"\nx: "+String.format("%.2f",xCord)+"\ny: "+String.format("%.2f",yCord);
+        return "id: "+id+"\nname: "+name+"\nx: "+String.format("%.2f",xCord)+"\ny: "+String.format("%.2f",yCord);
     }
 }

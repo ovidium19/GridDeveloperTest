@@ -17,6 +17,7 @@ import java.util.Random;
 public class EventController {
     private EventComparator xAxisCompare;
     private LocationComparator manDistCompare;
+    private BSTEvents eventTree;
     private PriorityQueue<Event> xClosest;
     private PriorityQueue<Event> manDistFarthest;
     private double xLoc,yLoc;
@@ -26,6 +27,7 @@ public class EventController {
     public EventController(double x,double y){
         xLoc=x;
         yLoc=y;
+        eventTree=new BSTEvents();
         xAxisCompare=new EventComparator(xLoc);
         manDistCompare=new LocationComparator(xLoc, yLoc);
         xClosest=new PriorityQueue<>(xAxisCompare);
@@ -44,7 +46,8 @@ public class EventController {
             x=rm.nextDouble()*20-10;
             y=rm.nextDouble()*20-10;
             name="Event "+String.valueOf(i+1);
-            xClosest.add(new Event(x,y,name));
+            //xClosest.add(new Event(x,y,name));
+            eventTree.insert(new Event(x,y,name));
         }
     }
    
@@ -71,5 +74,8 @@ public class EventController {
     }
     public PriorityQueue<Event> getClosestEvents(){
         return manDistFarthest;
+    }
+    public void printTree(){
+        eventTree.inOrder(eventTree.getRoot());
     }
 }

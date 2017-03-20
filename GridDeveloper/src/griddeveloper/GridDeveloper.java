@@ -24,7 +24,7 @@ public class GridDeveloper {
             y = Double.parseDouble(input[1]);
             eController=new EventController(x, y);
             eController.generateEvents(System.currentTimeMillis(), 10);
-            events=new PriorityQueue<>(eController.getXClosest());
+            /*events=new PriorityQueue<>(eController.getXClosest());
             while (!(events.isEmpty())){
                 Event temp=events.poll();
                 System.out.println(temp);
@@ -37,12 +37,15 @@ public class GridDeveloper {
                 Event temp=events.poll();
                 System.out.println(temp);
                 System.out.println(temp.calcManDistance(x, y));
-                
+             */  
+            eController.printTree();
+            
             }
-        }
         catch (Exception e){
             System.out.println(e);
             System.exit(0);
         }
+        }
+        
     }
-}
+
