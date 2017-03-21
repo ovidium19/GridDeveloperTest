@@ -27,6 +27,7 @@ public class BSTEvents {
     public Node getRoot(){
         return root;
     }
+    /*
     public Node find(Event toFind){
         Node iter=root;
         while(iter.val!=toFind){
@@ -37,7 +38,7 @@ public class BSTEvents {
             else iter=iter.right;
             
         }
-    }
+    }*/
     private Node maxLeftSubtreeParent(Node start){
         Node iter=start;
         Node parent=null;

@@ -22,6 +22,10 @@ public class LocationComparator implements Comparator<Event> {
     public int compare(Event x,Event y){
         double xManDist=Math.abs(x.getxCord()-xCord)+Math.abs(x.getyCord()-yCord);
         double yManDist=Math.abs(y.getxCord()-xCord)+Math.abs(y.getyCord()-yCord);
-        return (int)(yManDist-xManDist);
+        if(yManDist-xManDist>0)
+            return 1;
+        else if (yManDist-xManDist<0)
+            return -1;
+        else return 0;
     }
 }

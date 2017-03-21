@@ -23,13 +23,16 @@ public class GridDeveloper {
             x = Double.parseDouble(input[0]);
             y = Double.parseDouble(input[1]);
             eController=new EventController(x, y);
-            eController.generateEvents(System.currentTimeMillis(), 10);
+            eController.generateEvents(System.currentTimeMillis(), 2000);
             /*events=new PriorityQueue<>(eController.getXClosest());
             while (!(events.isEmpty())){
                 Event temp=events.poll();
                 System.out.println(temp);
                 System.out.println(temp.calcManDistance(x, y));
             }
+            
+             */  
+            eController.printEvents();
             eController.findClosestEvents();
             events=new PriorityQueue<>(eController.getClosestEvents());
             System.out.println(MessageFormat.format("Closest Events to location {0},{1}",x,y));
@@ -37,10 +40,9 @@ public class GridDeveloper {
                 Event temp=events.poll();
                 System.out.println(temp);
                 System.out.println(temp.calcManDistance(x, y));
-             */  
-            eController.printTree();
             
             }
+        }
         catch (Exception e){
             System.out.println(e);
             System.exit(0);
