@@ -32,10 +32,14 @@ public class Event {
         Generate 10 Tickets with random price in range of [0,100). Adds all tickets to the PriorityQueue
         */
         double price;
-        //rm.setSeed(System.currentTimeMillis());
-        for (int i=0;i<10;i++){
-            price=rm.nextDouble()*100;
-            tickets.add(new Ticket(price));}
+        int nrOfTickets;
+        nrOfTickets=(int) Math.floor(rm.nextDouble()*10);
+       
+        if(nrOfTickets>0)
+            for (int i=0;i<nrOfTickets;i++){
+                price=rm.nextDouble()*100+0.01;
+                tickets.add(new Ticket(price));
+            }
     }
     public Event(double x,double y,String rname){
         count+=1;
@@ -85,6 +89,9 @@ public class Event {
     }
     @Override
     public String toString(){
-        return "id: "+id+"\nname: "+name+"\nCheapest Ticket Price: "+tickets.peek()+"\nx: "+String.format("%.2f",xCord)+"\ny: "+String.format("%.2f",yCord);
+        if (tickets.size()>0)
+            return "id: "+id+"\nname: "+name+"\nCheapest Ticket Price: "+tickets.peek()+"\nx: "+String.format("%.2f",xCord)+"\ny: "+String.format("%.2f",yCord);
+        else
+            return "id: "+id+"\nname: "+name+"\nCheapest Ticket Price: No Tickets Available"+"\nx: "+String.format("%.2f",xCord)+"\ny: "+String.format("%.2f",yCord);
     }
 }

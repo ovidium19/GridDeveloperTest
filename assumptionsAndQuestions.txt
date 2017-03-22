@@ -1,0 +1,18 @@
+Assumptions made:
+	Events are stored inside the application, and the actual efficiency of the program is measured in how quickly we 
+	can get the closest Events. 
+	Plane size is actually [-10,10), meaning we cannot have a point with x=10 or y=10
+	Tickets are randomly generated. Number of tickets also randomly generated and it can be [0,9].
+	A ticket costs between 0 and 100 $
+
+Questions.
+- How might you change your program if you needed to support multiple events at the same location?
+	I think my solution addresses that, as I am already grouping many Events into one single cell. 
+	If the question is about which events you may select in case all of them have the same minimum distance,
+	we could either randomly select 5 events, or use another attribute to decide between them. Maybe we could choose
+	the ones with the cheapest tickets, or we could choose based on the user's preferences(e.g football, or rock concert etc)
+
+- How would you change your program if you were working with a much larger world size?
+	The grid can be scaled up and down based on what we define as a unit of measure. The difference between 1 and 2 on the grid can mean 1km, or 5km, or 10km. All the events on that radius would be contained in that one cell. This can keep the dimensions of the grid on the low side
+	When we get a customer location, we would know where he places on the grid. Therefore we might not have to load the entire grid. We could store the density of events on each layer around the cell of the customer's location. If the density is high enough, then we could only use a couple of layers to calculate the closest events, therefore saving space and time. Whenever I ran the program with 5000 generated events, I noticed that very rarely I would go above 50 events checked, meaning there is a lot of useless space used. We could come up with a method to quickly calculate the layered densities and therefore decide how much of the grid we would have to load in that one instance of the application.
+	
