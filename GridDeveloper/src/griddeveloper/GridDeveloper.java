@@ -51,7 +51,7 @@ public class GridDeveloper {
                 System.out.println("--------------------------------");
             
             }
-            System.out.println(Ticket.getCount());
+            System.out.println("nr of tickets generated: "+Ticket.getCount());
         }
         catch (Exception e){
             System.out.println(e);
