@@ -15,13 +15,24 @@ public class EventCell {
     private int xCord,yCord;
     private ArrayList<Event> events;
     private boolean visited;
+    private int layer;
     
     public EventCell(int x,int y){
         xCord=x;
         yCord=y;
         events=new ArrayList();
         visited=false;
+        layer=-2;
     }
+
+    public int getLayer() {
+        return layer;
+    }
+
+    public void setLayer(int layer) {
+        this.layer = layer;
+    }
+    
     public void addEvent(double x,double y, String rName){
         events.add(new Event(x,y,rName));
     }

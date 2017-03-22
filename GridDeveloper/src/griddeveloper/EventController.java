@@ -36,7 +36,7 @@ public class EventController {
         yLoc=(int)Math.floor(y)+10;
         //eventTree=new BSTEvents();
         //xAxisCompare=new EventComparator(xLoc);
-        manDistCompare=new LocationComparator(xLoc, yLoc);
+        manDistCompare=new LocationComparator(xLocReal, yLocReal);
         //xClosest=new PriorityQueue<>(xAxisCompare);
         manDistFarthest=new PriorityQueue<>(manDistCompare);
         rm=new Random();
@@ -73,13 +73,15 @@ public class EventController {
         }
     }
    
-    public void findClosestEvents(){
+    public int findClosestEvents(){
+        int count=0;
         int xTemp,yTemp;
         eventQueue.add(eventGrid[xLoc][yLoc]);
         eventQueue.get(0).setVisited(true);
+        eventQueue.get(0).setLayer(-1);
         manDistFarthest.add(new Event(100.0,100.0,""));
         while(!((manDistFarthest.size()==5) && 
-                (eventQueue.peek().calcDistance(xLoc, yLoc))>manDistFarthest.peek().calcManDistance(xLocReal, yLocReal)+1)){
+                (eventQueue.peek().getLayer()>manDistFarthest.peek().calcManDistance(xLocReal, yLocReal)))){
             EventCell tempCell = eventQueue.poll();
             if (tempCell==null) break;
             xTemp=tempCell.getxCord();
@@ -87,21 +89,41 @@ public class EventController {
             //add all the neighbouring cells to the queue
             if (xTemp>=1 && !(eventGrid[xTemp-1][yTemp].isVisited())){eventQueue.add(eventGrid[xTemp-1][yTemp]);
                                                                       eventGrid[xTemp-1][yTemp].setVisited(true);
+                                                                      eventGrid[xTemp-1][yTemp].setLayer(tempCell.getLayer()+1);
             }
             if (xTemp<19 && !(eventGrid[xTemp+1][yTemp].isVisited())){eventQueue.add(eventGrid[xTemp+1][yTemp]);
                                                                        eventGrid[xTemp+1][yTemp].setVisited(true);
+                                                                       eventGrid[xTemp+1][yTemp].setLayer(tempCell.getLayer()+1);
             }
             if (yTemp>=1 && !(eventGrid[xTemp][yTemp-1].isVisited())){eventQueue.add(eventGrid[xTemp][yTemp-1]);
                                                                       eventGrid[xTemp][yTemp-1].setVisited(true);
+                                                                      eventGrid[xTemp][yTemp-1].setLayer(tempCell.getLayer()+1);
             }
             if (yTemp<19 && !(eventGrid[xTemp][yTemp+1].isVisited())){eventQueue.add(eventGrid[xTemp][yTemp+1]);
                                                                       eventGrid[xTemp][yTemp+1].setVisited(true);
+                                                                      eventGrid[xTemp][yTemp+1].setLayer(tempCell.getLayer()+1);
+            }
+            if(xTemp>=1 && yTemp>=1 && !(eventGrid[xTemp-1][yTemp-1].isVisited())){eventQueue.add(eventGrid[xTemp-1][yTemp-1]);
+                                                                                   eventGrid[xTemp-1][yTemp-1].setVisited(true);
+                                                                                   eventGrid[xTemp-1][yTemp-1].setLayer(tempCell.getLayer()+1);
+            }
+            if(xTemp<19 && yTemp<19 && !(eventGrid[xTemp+1][yTemp+1].isVisited())){eventQueue.add(eventGrid[xTemp+1][yTemp+1]);
+                                                                                   eventGrid[xTemp+1][yTemp+1].setVisited(true);
+                                                                                   eventGrid[xTemp+1][yTemp+1].setLayer(tempCell.getLayer()+1);
+            }
+            if(xTemp>=1 && yTemp<19 && !(eventGrid[xTemp-1][yTemp+1].isVisited())){eventQueue.add(eventGrid[xTemp-1][yTemp+1]);
+                                                                                   eventGrid[xTemp-1][yTemp-1].setVisited(true);
+                                                                                   eventGrid[xTemp-1][yTemp-1].setLayer(tempCell.getLayer()+1);
+            }
+            if(xTemp<19 && yTemp>=1 && !(eventGrid[xTemp+1][yTemp-1].isVisited())){eventQueue.add(eventGrid[xTemp+1][yTemp-1]);
+                                                                                   eventGrid[xTemp+1][yTemp-1].setVisited(true);
+                                                                                   eventGrid[xTemp+1][yTemp-1].setLayer(tempCell.getLayer()+1);
             }
             //-----------------------------------------------
             //Check all events in the current cell and add the eligible ones to the PriorityQueue
             ArrayList<Event> tempList = tempCell.getEvents();
             for (int i=0;i<tempList.size();i++){
-                
+                count+=1;
                 if (manDistFarthest.size()<5) manDistFarthest.add(tempList.get(i));
                 else
                     if (tempList.get(i).calcManDistance(xLocReal, yLocReal)<
@@ -112,7 +134,7 @@ public class EventController {
                 
             }
         }
-        
+        return count;
     }
     public PriorityQueue<Event> getClosestEvents(){
         return manDistFarthest;
