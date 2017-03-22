@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package griddeveloper;
 
 import java.util.PriorityQueue;
@@ -10,7 +6,14 @@ import java.util.Random;
 
 /**
  *
- * @author BOCU
+ * @author Ovidiu Mitroi
+ * Class Event ->
+ *      properties:
+ *          int count - static ->  counts the nr of instances of this class and assigns the number as the object's id
+ *          double xCord,yCord -> the (x,y) coordinates of this Event
+ *          id, name - attributes that describe the Event
+ *          PriorityQueue tickets -> holds a list of Tickets, in a min heap data structure. The element
+ *                                  at the front of the queue will always be the Ticket with the smallest price
  */
 public class Event {
     private static int count=0;
@@ -20,12 +23,19 @@ public class Event {
     private String name;
     private PriorityQueue<Ticket> tickets;
     
-    private void generateTickets(){
-        double price;
+    static {
         rm.setSeed(System.currentTimeMillis());
+    }
+    
+    private void generateTickets(){
+        /*
+        Generate 10 Tickets with random price in range of [0,100). Adds all tickets to the PriorityQueue
+        */
+        double price;
+        //rm.setSeed(System.currentTimeMillis());
         for (int i=0;i<10;i++){
             price=rm.nextDouble()*100;
-            this.tickets.add(new Ticket(price));}
+            tickets.add(new Ticket(price));}
     }
     public Event(double x,double y,String rname){
         count+=1;
@@ -68,6 +78,9 @@ public class Event {
     
     
     public double calcManDistance(double x,double y){
+        /*
+        A useful method to quickly calculate the Manhattan distance from this event to a parameter point
+        */
         return Math.abs(xCord-x)+Math.abs(yCord-y);
     }
     @Override

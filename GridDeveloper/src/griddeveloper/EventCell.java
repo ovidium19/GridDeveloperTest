@@ -1,15 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package griddeveloper;
 
 import java.util.ArrayList;
 
 /**
  *
- * @author BOCU
+ * @author Ovidiu Mitroi
+ * 
+ * Class EventCell ->
+ *      Provides a description of what a cell inside our grid contains.
+ *      
+ *      Properties:
+ *         int xCord,yCord -> the coordinates of this cell on the grid
+ *         ArrayList<Event> events -> a list containing all the Events in this cell. 
+ *                      The Events contained in a cell have coordinates of x in range [xCord,xCord+1)
+ *                                                                         y in range [yCord,yCord+1)
+ *         boolean visited -> a handy boolean through which we track if we have visited this cell when finding
+ *                            the closest events.
+ * 
+ *         int layer -> an integer which tracks of which layer this cell belongs to.
+ *                      The layer of the cell describes the minimum manhattan distance between this cell and 
+ *                      the cell containing our person location. 
+ *                      By default, the cell containing the person location has layer -1, its neighbouring cells
+ *                      have layer 0, the neighbouring cells of cells with layer 0 have layer 1 and so on. 
  */
 public class EventCell {
     private int xCord,yCord;
@@ -22,7 +35,7 @@ public class EventCell {
         yCord=y;
         events=new ArrayList();
         visited=false;
-        layer=-2;
+        layer=-2; // -2 is a non value in our case since we only care about values from -1 onwards.
     }
 
     public int getLayer() {

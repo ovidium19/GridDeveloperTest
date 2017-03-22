@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 
 public class GridDeveloper {
+    //contains the main method
     private static EventController eController;
     private static PriorityQueue<Event> events;
       
@@ -18,32 +19,39 @@ public class GridDeveloper {
         double x;
         double y;
         
-        
+        //Read the customer location from the keyboard
         try (Scanner c = new Scanner(System.in)) {
             System.out.println("(x,y): ");
             String[] input=c.nextLine().split(",");
             x = Double.parseDouble(input[0]);
             y = Double.parseDouble(input[1]);
             eController=new EventController(x, y);
-            eController.generateEvents(System.currentTimeMillis(), 500);
-            /*events=new PriorityQueue<>(eController.getXClosest());
-            while (!(events.isEmpty())){
-                Event temp=events.poll();
-                System.out.println(temp);
-                System.out.println(temp.calcManDistance(x, y));
-            }
-            
+            /*
+            Generate random events
+            Edit 1st parameter to set up a constant seed
+            Edit 2nd parameter to alter the nr of Events created
             */
+            eController.generateEvents(System.currentTimeMillis(), 20);
+            
+            //print all events created -- comment this out if not needed
             eController.printEvents();
+            //----------------------------------------------
+            //call the method to find closest events and print how many events were checked
             System.out.println("Nr of Events checked: "+eController.findClosestEvents());
+            
+            
+            //print the found events
             events=new PriorityQueue<>(eController.getClosestEvents());
             System.out.println(MessageFormat.format("Closest Events to location {0},{1}",x,y));
+            System.out.println("--------------------------------------------------------");
             while (!(events.isEmpty())){
                 Event temp=events.poll();
                 System.out.println(temp);
                 System.out.println(temp.calcManDistance(x, y));
+                System.out.println("--------------------------------");
             
             }
+            System.out.println(Ticket.getCount());
         }
         catch (Exception e){
             System.out.println(e);

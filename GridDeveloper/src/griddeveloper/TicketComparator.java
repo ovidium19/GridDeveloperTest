@@ -1,15 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package griddeveloper;
 
 import java.util.Comparator;
 
 /**
  *
- * @author mitroio
+ * @author Ovidiu Mitroi
+ *          Class TicketComparator
+ *                  Describes how Tickets are compared to one another inside the minHeap.
+ *                  In this case, they are compared based on the price of the ticket.
  */
 public class TicketComparator implements Comparator<Ticket> {
 

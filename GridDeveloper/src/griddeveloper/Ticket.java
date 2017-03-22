@@ -1,13 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package griddeveloper;
 
 /**
  *
- * @author mitroio
+ * @author Ovidiu Mitroi
+ *      Class Ticket ->
+ *          Properties:
+ *              double price
+ *              int id
+ *              a static count that counts the nr of instances of the class and assigns that number to each new instance
+ *              as its id
  */
 public class Ticket {
     private static int count=0;
@@ -37,6 +39,9 @@ public class Ticket {
     }
     
     public String toString(){
-        return "$"+String.valueOf(price);
+        return "$"+String.format("%.2f",price);
+    }
+    public static int getCount(){
+        return count;
     }
 }

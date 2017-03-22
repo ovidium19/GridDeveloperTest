@@ -1,15 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package griddeveloper;
 
 import java.util.Comparator;
 
 /**
  *
- * @author BOCU
+ * @author Ovidiu Mitroi
+ *      Class LocationComparator
+ * 
+ *          Describes how Events are compared to one another inside the maxHeap that holds the top 5 closest Events.
+ *          In this case, Events are compared based on their Manhattan Distance to the parameter point, and they are 
+ *          arranged in reverse order.
+ *
  */
 public class LocationComparator implements Comparator<Event> {
     private double xCord,yCord;
